@@ -20,30 +20,35 @@
     var CONFIG = {"hostname":"happyzxy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true,"onmobile":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="仰天大笑出门去">
-<meta property="og:type" content="website">
-<meta property="og:title" content="浅忆">
-<meta property="og:url" content="https://happyzxy.github.io/index.html">
+  <meta name="description" content="第一部分——宏包及文档类型1234567% \documentclass[twocolumn]{cctart} \documentclass[twocolumn]{article}\usepackage{graphicx}  % 插入图片\usepackage{caption2}  % 修改图注相关\usepackage{subfigure} % 用来插入并列分布的图片% \usepackage{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTex 入门">
+<meta property="og:url" content="https://happyzxy.github.io/2020/08/01/latex-ru-men/index.html">
 <meta property="og:site_name" content="浅忆">
-<meta property="og:description" content="仰天大笑出门去">
+<meta property="og:description" content="第一部分——宏包及文档类型1234567% \documentclass[twocolumn]{cctart} \documentclass[twocolumn]{article}\usepackage{graphicx}  % 插入图片\usepackage{caption2}  % 修改图注相关\usepackage{subfigure} % 用来插入并列分布的图片% \usepackage{">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/01/latex-ru-men/bug01.png">
+<meta property="article:published_time" content="2020-08-01T08:07:05.000Z">
+<meta property="article:modified_time" content="2020-08-02T05:46:13.881Z">
 <meta property="article:author" content="Zhappy">
+<meta property="article:tag" content="LaTex">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://happyzxy.github.io/2020/08/01/latex-ru-men/bug01.png">
 
-<link rel="canonical" href="https://happyzxy.github.io/">
+<link rel="canonical" href="https://happyzxy.github.io/2020/08/01/latex-ru-men/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>浅忆</title>
+  <title>LaTex 入门 | 浅忆</title>
   
 
 
@@ -156,9 +161,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -174,10 +180,9 @@
       <meta itemprop="name" content="浅忆">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/01/latex-ru-men/" class="post-title-link" itemprop="url">LaTex 入门</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          LaTex 入门
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -205,7 +210,14 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -223,7 +235,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="第一部分——宏包及文档类型"><a href="#第一部分——宏包及文档类型" class="headerlink" title="第一部分——宏包及文档类型"></a>第一部分——宏包及文档类型</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% \documentclass[twocolumn]{cctart} </span></span><br><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[twocolumn]</span><span class="string">{article}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{graphicx}</span></span>  <span class="comment">% 插入图片</span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{caption2}</span></span>  <span class="comment">% 修改图注相关</span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{subfigure}</span></span> <span class="comment">% 用来插入并列分布的图片</span></span><br><span class="line"><span class="comment">% \usepackage{float}     % 图片是否浮动</span></span><br><span class="line"><span class="comment">% \usepackage{ctex}      % 用来编译中文字体</span></span><br></pre></td></tr></tbody></table></figure>
+        <h4 id="第一部分——宏包及文档类型"><a href="#第一部分——宏包及文档类型" class="headerlink" title="第一部分——宏包及文档类型"></a>第一部分——宏包及文档类型</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% \documentclass[twocolumn]{cctart} </span></span><br><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[twocolumn]</span><span class="string">{article}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{graphicx}</span></span>  <span class="comment">% 插入图片</span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{caption2}</span></span>  <span class="comment">% 修改图注相关</span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{subfigure}</span></span> <span class="comment">% 用来插入并列分布的图片</span></span><br><span class="line"><span class="comment">% \usepackage{float}     % 图片是否浮动</span></span><br><span class="line"><span class="comment">% \usepackage{ctex}      % 用来编译中文字体</span></span><br></pre></td></tr></tbody></table></figure>
 <p><code>\documentclass</code>中定义文档类型为article，一般LaTeX提供三种基本文档，另外两种是report和book。三者分别用来写小篇幅的文章、中篇幅的报告和长篇幅的书籍，<code>twocolumn</code>是把文章分为了两栏。<br>第一部分是文档的导言部分，文档的全局设置及版面相关的内容都在这里进行设置，LaTeX的注释是%。</p>
 <h4 id="文章主体——body"><a href="#文章主体——body" class="headerlink" title="文章主体——body"></a>文章主体——body</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[twocolumn]</span><span class="string">{article}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{graphicx}</span></span> </span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">{document}</span></span></span><br><span class="line"><span class="tag">\<span class="name">title</span><span class="string">{Latex study}</span></span></span><br><span class="line"><span class="tag">\<span class="name">author</span><span class="string">{zhappy}</span></span></span><br><span class="line"><span class="tag">\<span class="name">section</span><span class="string">{Introduction}</span></span></span><br><span class="line">     the right content.</span><br><span class="line">    <span class="tag">\<span class="name">subsection</span><span class="string">{Design}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">par</span></span> LaTeX is based on the idea that it is better to leave document design to document designers, and to let authors get on with writing documents.</span><br><span class="line">        <span class="tag">\<span class="name">subsubsection</span><span class="string">{Latex Features}</span></span></span><br><span class="line">            Control over large documents containing sectioning, cross-references, tables and figures.</span><br><span class="line">            Typesetting of complex mathematical formulas.</span><br><span class="line"></span><br><span class="line"><span class="comment">% 参考文献</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% append</span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">{document}</span></span></span><br></pre></td></tr></tbody></table></figure>
 <p>文章的主体内容均是在其中撰写，类似于html的</p>
@@ -259,7 +271,6 @@
             document.body.appendChild(img);
           });
       </script>
-      
     </div>
 
     
@@ -268,535 +279,76 @@
     <!--
     <div>
       
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/28/ji-qi-xue-xi-ru-men-pian/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/28/ji-qi-xue-xi-ru-men-pian/" class="post-title-link" itemprop="url">机器学习入men篇</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-28 22:03:38" itemprop="dateCreated datePublished" datetime="2020-07-28T22:03:38+08:00">2020-07-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-29 21:09:56" itemprop="dateModified" datetime="2020-07-29T21:09:56+08:00">2020-07-29</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>464</span>
-            </span>
-
-        </div>
-      </header>
-
+        <div>
     
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 <i class="fa fa-paw"></i>感谢您的阅读-------------</div>
     
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>1、What is the defination of state-of-the-art(SOTA)performance?</strong><br><strong>2、What is the baseline pipeline?</strong><br><strong>2、What is the pipeline?</strong></p>
-<h4 id="1、SOTA"><a href="#1、SOTA" class="headerlink" title="1、SOTA"></a>1、SOTA</h4><p>SOTA可以简单理解为：最高性能指标，一般搞人工智能方面的，提出的方法要达到这个标准，才能表明你的方法先进、顶级。<br>但是也不能功利心这么强吧，<br><img src="/2020/07/28/ji-qi-xue-xi-ru-men-pian/01.png" style="zoom: 75%;"></p>
-<h4 id="2、baseline"><a href="#2、baseline" class="headerlink" title="2、baseline"></a>2、baseline</h4><p>baseline一词应该指的是对照组，基准线，就是你这个实验有提升，那么你的提升是对比于什么的提升，被对比的就是baseline。比如你要研究一个新的模型，你是在前人的模型基础上新增加了一些组件，别人也基本都是在这个模型上进行修改，那这个模型就叫做baseline model——基准模型。听名字就能听出来，就是你自己模型的一个基准，一个基本的框架，模型再复杂，最根本的框架是差不多的。</p>
-<h4 id="3、pipeline"><a href="#3、pipeline" class="headerlink" title="3、pipeline"></a>3、pipeline</h4><p>pipeline是机器学习算法的基础架构。流水线包括<br>（1）数据读取<br>（2) 数据预处理<br>（3）创建模型<br>（4）评估模型结果<br>（5）模型调参<br>（6）实际应用</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-    <!--
-    <div>
+</div>
       
     </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
+        <div class="reward-container">
+  <div>Donate comment here. 坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
       
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/19/shu-ju-de-yi-xie-te-xing/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/19/shu-ju-de-yi-xie-te-xing/" class="post-title-link" itemprop="url">数据的一些特性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-07-19 22:33:28 / 修改时间：22:40:08" itemprop="dateCreated datePublished" datetime="2020-07-19T22:33:28+08:00">2020-07-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>94</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      <div style="display: inline-block;">
+        <img src="/images/wechat.png" alt="Zhappy 微信支付">
+        <p>微信支付</p>
+      </div>
       
-          <p>数据是保存在内存中，而变量只是一个链接，指向内存地址。变量的赋值的本质是，新的变量也指向内存中的相同地址，只有所有链接都被删除了，那块内存才会被回收，那块内存区域中保存的数据就不复存在了。</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="Zhappy 支付宝">
+        <p>支付宝</p>
+      </div>
 
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+  </div>
+</div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/10/ci-hui-ji-lei/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/10/ci-hui-ji-lei/" class="post-title-link" itemprop="url">词汇积累</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-10 20:41:02" itemprop="dateCreated datePublished" datetime="2020-07-10T20:41:02+08:00">2020-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-15 09:53:51" itemprop="dateModified" datetime="2020-07-15T09:53:51+08:00">2020-07-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Article-Reading/" itemprop="url" rel="index"><span itemprop="name">Article Reading</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>183</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>incorporating                agj. 合并的<br>stabilize                    vt. 使稳固，使安定<br>replicate                    vt. 复制(复现)；折叠; vi. 重复；折转<br>empirical                    adj. 经验主义的，完全根据经验的；实证的<br>vicinity distribution        邻近分布<br>In a nutshell                一言以蔽之<br>preliminary                    adj. 初步的；开始的；预备的；n. 初步行动；准备工作；预赛，预试</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/10/lun-wen-biao-da-ci-hui-ji-lei/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/10/lun-wen-biao-da-ci-hui-ji-lei/" class="post-title-link" itemprop="url">论文表达词汇积累</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-10 20:23:11" itemprop="dateCreated datePublished" datetime="2020-07-10T20:23:11+08:00">2020-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-11 07:43:39" itemprop="dateModified" datetime="2020-07-11T07:43:39+08:00">2020-07-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Article-Writing/" itemprop="url" rel="index"><span itemprop="name">Article Writing</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>278</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1、Motivated by these issues, we introduce a simple and data-agnostic data augmenta-<br>tion routine, <strong><font color="blue">termed mixup</font></strong> (Section 2). <strong><font color="blue">In a nutshell</font></strong>, mixup constructs virtual training examples</p>
-<p>2、The source-code necessary to <strong><font color="blue">replicate</font></strong> our CIFAR-10 experiments is available at:<br>            <a href="https://github.com/facebookresearch/mixup-cifar10" target="_blank" rel="noopener">https://github.com/facebookresearch/mixup-cifar10</a>.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/10/mixup-beyond-empirical-risk-minimization-wen-xian-yue-du/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/10/mixup-beyond-empirical-risk-minimization-wen-xian-yue-du/" class="post-title-link" itemprop="url">mixup:BEYOND EMPIRICAL RISK MINIMIZATION文献阅读</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-10 12:14:15" itemprop="dateCreated datePublished" datetime="2020-07-10T12:14:15+08:00">2020-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-28 22:05:21" itemprop="dateModified" datetime="2020-07-28T22:05:21+08:00">2020-07-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Article-Reading/" itemprop="url" rel="index"><span itemprop="name">Article Reading</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><p><strong>Why are neural networks sensitivity to adversarial example?</strong><br><strong>What is data augmentation?</strong><br><strong>What is MixUp</strong></p>
-<h4 id="1、the-commonalities-of-neural-networks"><a href="#1、the-commonalities-of-neural-networks" class="headerlink" title="1、the commonalities of neural networks"></a>1、the commonalities of neural networks</h4><ul>
-<li>Neurals networks are trained as to minimize their average error over the training data, a learning rule also known as the Empirical Risk Minimization(ERM)principle. However, ERM is unable to explain or provide generalization on testing distributions that differ only slightly from the training data.</li>
-<li>The size of these state-of-the-art neural networks scales linearly with the number of training example,but this will make ERM unguaranted.</li>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Zhappy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://happyzxy.github.io/2020/08/01/latex-ru-men/" title="LaTex 入门">https://happyzxy.github.io/2020/08/01/latex-ru-men/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
 </ul>
-<h3 id="2、Data-augmentation"><a href="#2、Data-augmentation" class="headerlink" title="2、Data augmentation"></a>2、Data augmentation</h3><p>The method of choice to train on similar but different examples to the training data is known as data augmentation, formalized by the Vicinal Risk Minimization(VRM) priciple. In VRM, human knowledge is required to describe a vicinity or neighborhood around each example in the training data. Then, additional virtual examole can be drawn form the vicinity distribution of the training examples to enlarge the support of the training distribution.<br>It is a technique to automatically increase the size of the training data without using human annotators. DA is shown to be effective for certain tasks in computer vison and NLP. </p>
-<ul>
-<li>In computer vision, labeled images that are augmented through simple operators such as rotate, crop, pad, filp are shown to be effective for training deep neural networks.</li>
-<li>In NLP, setences that are augmented by replacing tokens with their corresponding synonyms are shown to be effective for training sentence classifiers. However, <strong><font color="blue">in NLP tasks the use of DA is still limited, as synonym of a word are very limited and other operators can distort the meaning of the augmented sentence.</font></strong><br>Intuitively, such augmented data allow the trained model to learn properties that remain invariant in the data. <strong><font color="blue"> While data augmentation consistenly leads to improved generalization, the procedure is data-dependent, and thus requires the use of expert knowledge. Furthermore , data augmentation assumes that the examples in the vicinity share the same class, and does not model the vicinity relation across examples of different classes.</font></strong></li>
-</ul>
-<h3 id="2、MixUp"><a href="#2、MixUp" class="headerlink" title="2、MixUp"></a>2、MixUp</h3><p><img src="/2020/07/10/mixup-beyond-empirical-risk-minimization-wen-xian-yue-du/01.png" style="zoom: 75%;"></p>
-<h3 id="source-code"><a href="#source-code" class="headerlink" title="source-code"></a>source-code</h3><p>The source-code necessary to <strong><font color="blue">replicate</font></strong> our CIFAR-10 experiments is available at:<a href="https://github.com/facebookresearch/mixup-cifar10" target="_blank" rel="noopener">https://github.com/facebookresearch/mixup-cifar10</a>.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
+</div>
 
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          
+          <div class="post-tags">
+              <a href="/tags/LaTex/" rel="tag">
+              <i class="fa fa-tag"> LaTex</i>
+              </a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/28/ji-qi-xue-xi-ru-men-pian/" rel="prev" title="机器学习入men篇">
+      <i class="fa fa-chevron-left"></i> 机器学习入men篇
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
   
-
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
@@ -847,6 +399,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一部分——宏包及文档类型"><span class="nav-number">1.</span> <span class="nav-text">第一部分——宏包及文档类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章主体——body"><span class="nav-number">2.</span> <span class="nav-text">文章主体——body</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#公式"><span class="nav-number">3.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片的插入及其格式转换"><span class="nav-number">4.</span> <span class="nav-text">图片的插入及其格式转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#append"><span class="nav-number">6.</span> <span class="nav-text">append</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于分栏"><span class="nav-number">7.</span> <span class="nav-text">关于分栏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bug们"><span class="nav-number">8.</span> <span class="nav-text">Bug们</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1022,59 +575,6 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
