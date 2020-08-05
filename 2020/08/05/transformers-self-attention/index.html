@@ -20,19 +20,35 @@
     var CONFIG = {"hostname":"happyzxy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true,"onmobile":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于this model leverages mass “self-attention” layers，seq2seq在transformers01篇已经解释过，接下来将对self-attention进行描述注：本片博客是看李宏毅老师教学视频后的课程笔记 Sequence对一个句子，">
+  <meta name="description" content="transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于this model leverages mass “self-attention” layers，seq2seq在transformers-seq2seq篇已经解释过，接下来将对self-attention进行描述注：本片博客是看李宏毅老师教学视频后的课程笔记 Sequence">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Transformers-self attention">
 <meta property="og:url" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/index.html">
 <meta property="og:site_name" content="浅忆">
-<meta property="og:description" content="transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于this model leverages mass “self-attention” layers，seq2seq在transformers01篇已经解释过，接下来将对self-attention进行描述注：本片博客是看李宏毅老师教学视频后的课程笔记 Sequence对一个句子，">
+<meta property="og:description" content="transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于this model leverages mass “self-attention” layers，seq2seq在transformers-seq2seq篇已经解释过，接下来将对self-attention进行描述注：本片博客是看李宏毅老师教学视频后的课程笔记 Sequence">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/rnn01.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/cnn02.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa01.png">
 <meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/cnn01.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/cnn02.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/cnn03.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa01.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa02.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa03.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa05.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa04.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa06.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa07.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa08.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa09.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa10.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa12.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa11.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa13.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa14.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa15.png">
+<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa17.png">
 <meta property="article:published_time" content="2020-08-05T10:39:32.000Z">
-<meta property="article:modified_time" content="2020-08-05T10:43:44.774Z">
+<meta property="article:modified_time" content="2020-08-05T15:01:34.571Z">
 <meta property="article:author" content="Zhappy">
 <meta property="article:tag" content="transformers">
 <meta property="article:tag" content="self attention">
@@ -196,7 +212,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-05 18:39:32 / 修改时间：18:43:44" itemprop="dateCreated datePublished" datetime="2020-08-05T18:39:32+08:00">2020-08-05</time>
+              <time title="创建时间：2020-08-05 18:39:32 / 修改时间：23:01:34" itemprop="dateCreated datePublished" datetime="2020-08-05T18:39:32+08:00">2020-08-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,7 +237,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>836</span>
+              <span>2k</span>
             </span>
 
         </div>
@@ -233,14 +249,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于<strong>this model leverages mass “self-attention” layers</strong>，seq2seq在transformers01篇已经解释过，接下来将对<code>self-attention</code>进行描述<br>注：本片博客是看李宏毅老师教学视频后的课程笔记</p>
-<h4 id="Sequence"><a href="#Sequence" class="headerlink" title="Sequence"></a>Sequence</h4><p>对一个句子，之前多是使用RNN（Recurrent Neural Network）进行single direction or bidirection 处理<br>，但是RNN的计算不容易并行化，如下图1中所示：<img src="/2020/08/05/transformers-self-attention/rnn01.png"> </p><p align="center"><font size="2"><strong>图1 RNN model</strong></font></p><p></p>
-<ul>
-<li>当为单向时，已知b1，b2才可得b2；已知b1，b2，b3才可得b3，也就是说，如果是双向，它需要看完整条sequence。<br>用CNN去解决这个问题时，如下图2所示，图中：<br><br><pre><code>  &lt;td&gt;&lt;img src="Transformers-self-attention/cnn02.png" style="zoom: 75%;" /&gt;&lt;/td&gt;
-</code></pre><br><br><br><strong>filters in higher layer can consider longer sequence </strong><img src="/2020/08/05/transformers-self-attention/cnn02.png"><h4 id="self-attention"><a href="#self-attention" class="headerlink" title="self-attention"></a>self-attention</h4><p>基于上述的研究过程及其问题，self-attention目的做到rnn做到的，所以self-attention layer 的output和input和rnn是一样的<strong>输入一个sequence，输出anothersequence</strong>，首次在<code>https://arxiv.org/abs/1706.03762</code>中提出<br><img src="/2020/08/05/transformers-self-attention/sa01.png"></p><table>  <tbody><tr><td><img src="/2020/08/05/transformers-self-attention/cnn01.png" style="zoom: 75%;"></td>  <td></td>
+        <p>transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于<strong>this model leverages mass “self-attention” layers</strong>，seq2seq在transformers-seq2seq篇已经解释过，接下来将对<code>self-attention</code>进行描述<br>注：本片博客是看李宏毅老师教学视频后的课程笔记</p>
+<h4 id="Sequence"><a href="#Sequence" class="headerlink" title="Sequence"></a>Sequence</h4><p>对一个句子，之前多是使用RNN（Recurrent Neural Network）进行single direction or bidirection 处理<br>，但是RNN的计算不容易并行化，如下图1中所示：<img src="/2020/08/05/transformers-self-attention/rnn01.png" style="zoom: 45%;"> </p><p align="center"><font size="2"><strong>图 1 RNN model</strong></font></p><p></p>
+<p><font color="blue" size="3">当为单向时，已知b1，b2才可得b2；已知b1，b2，b3才可得b3，也就是说，如果是双向，它需要看完整条sequence。</font><br>用CNN去解决这个问题时，如下图2所示，图中：<br><strong>  Step1. </strong><img src="/2020/08/05/transformers-self-attention/cnn01.png" style="zoom: 45%;"><br><strong>  Step2.</strong><img src="/2020/08/05/transformers-self-attention/cnn02.png" style="zoom: 45%;"></p><p align="center"><font size="2"><strong>图 2 CNN model</strong></font></p><br>filter（橙色三角形，CNN中的概念），filter与step选取的subsequent进行inner product 得出一个数值（橙色圆形表示）,<strong>filters in higher layer can consider longer sequence </strong><img src="/2020/08/05/transformers-self-attention/cnn03.png" style="zoom: 45%;"><p align="center"><font size="2"><strong>图 3 CNN model layers</strong></font></p>也就是对于一个长句子，它需要很多层的叠加，才能看完整个句子，有点耗时耗力。<p></p>
+<h4 id="self-attention"><a href="#self-attention" class="headerlink" title="self-attention"></a>self-attention</h4><p>基于上述的研究过程及其问题，self-attention目的做到rnn做到的，所以self-attention layer 的output和input和rnn是一样的<strong>输入一个sequence，输出another sequence</strong>，首次在<code>https://arxiv.org/abs/1706.03762</code>中提出的。<br><img src="/2020/08/05/transformers-self-attention/sa01.png" style="zoom: 45%;"></p>
+<p align="center"><font size="2"><strong>图 4 self-attention（a）</strong></font></p>
+$ q: $query(to match others) <p align="center">$ q^i = W^qa^i $</p>
+$ k: $key(to be matched) <p align="center">$ k^i = W^ka^i $</p>
+$ v: $information to be extracted <p align="center">$ v^i = W^va^i $</p>
+input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，下面进入self-attention layer ,序列$a^1,a^2,...,a^n$分别乘以不同的矩阵（transformation），产生三个不同的vector，分别称为`q k v`。
+<p>
+</p><p><strong>Step1. 每个query q 去对每个key k 做attention （attention的作用是对所输入的向量计算其相似度，output a score </strong></p>
+<img src="/2020/08/05/transformers-self-attention/sa02.png" style="zoom: 45%;">这里使用 Scaled Dot-Product Attention :$ a_{1,i}= \frac{q^1*k^i}{\sqrt{d}}$ ，其中d是和q,k的dimension。
+<p>
+</p><p><strong>  Step2. soft-max </strong></p>
+<img src="/2020/08/05/transformers-self-attention/sa03.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 5 self-attention（b）</strong></font></p>其中，$ \hat{a}_{1,i}= \frac{exp(a_{1,i})}{\sum_{j}exp(a_{1,j})}$
+<p>
+</p><p><strong>  Step3. key k </strong></p>
+<img src="/2020/08/05/transformers-self-attention/sa05.png" style="zoom: 33%;"><p>
+<img src="/2020/08/05/transformers-self-attention/sa04.png" style="zoom: 45%;">
+</p><p align="center"><font size="2"><strong>图 6 self-attention（c）</strong></font></p>
+其中，$$ b^{1}=\sum_{i}\hat{a}_{1,i}v^i $$，$b^1$considers the whole sequence，$v^i$的值是由$a^i$transformation而来，如果要考虑某个$a^i$，只需调整$ \hat{a}_{1,i} $
+同理，并行计算$b^{2}$，$b^{3}$，$b^{4}$,...,$b^{n}$同样平行计算
+<img src="/2020/08/05/transformers-self-attention/sa06.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 7 平行化计算（a）</strong></font></p>
+可能上述中平行化还不是很明显，以下面形式表达更为明了
+<img src="/2020/08/05/transformers-self-attention/sa07.png" style="zoom: 45%;">
+<img src="/2020/08/05/transformers-self-attention/sa08.png" style="zoom: 45%;">
+<img src="/2020/08/05/transformers-self-attention/sa09.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 8 平行化计算（b）</strong></font></p>
+那么整个self attention过程就可以简化为（GPU可以加速矩阵乘法）：
+<img src="/2020/08/05/transformers-self-attention/sa10.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 9 平行化计算（c）</strong></font></p>
 
 
-</tr></tbody></table>  &lt;/tr&gt;&lt;/table&gt;filter（橙色三角形，CNN中的概念），filter与step选取的subsequent进行inner product 得出一个数值（橙色圆形表示）, 也就是对于一个长句子，它需要很多层的叠加，才能看完整个句子，有点耗时耗力。</li></ul><script>
+<h4 id="Multi-head-self-attention"><a href="#Multi-head-self-attention" class="headerlink" title="Multi-head self-attention"></a>Multi-head self-attention</h4><p>self attention的变形—Multi-head self attention，以2 heads 为例<br><img src="/2020/08/05/transformers-self-attention/sa12.png" style="zoom: 35%;"><br><img src="/2020/08/05/transformers-self-attention/sa11.png" style="zoom: 45%;"></p>
+<p></p><p align="center"><font size="2"><strong>图 10 Multi-head </strong></font></p><br>$W^{0}$在降维中使用，因为$b^{i,1}$和$b^{i,2}$的连接<p></p>
+<h4 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h4><p>在self attention中，么有位置信息，原始paper中是手动s设置position information $e^i$<br><img src="/2020/08/05/transformers-self-attention/sa13.png" style="zoom: 55%;"></p>
+<p></p><p align="center"><font size="2"><strong>图 11 位置信息（a） </strong></font></p><br><strong><font color="blue">这里关于“+”，可以理解成，在each $x^i$ 后appends a one-hot vector $p^i$，$p^i$中记录了位置信息</font></strong><br><img src="/2020/08/05/transformers-self-attention/sa14.png" style="zoom: 45%;"><p></p>
+<p></p><p align="center"><font size="2"><strong>图 12 位置信息（b） </strong></font></p><br>$W^p$为公式计算所得，它的含义如下所示<br><img src="/2020/08/05/transformers-self-attention/sa15.png" style="zoom: 45%;"><br>图意不理解<p></p>
+<h4 id="Seq2seq-with-Attention"><a href="#Seq2seq-with-Attention" class="headerlink" title="Seq2seq with Attention"></a>Seq2seq with Attention</h4><p>一般的Seq2seq model是用RNN做的，如果结合attention则是这样的效果，<a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" target="_blank" rel="noopener">google提供了可视化效果展示</a></p>
+<h4 id="transformers-架构图"><a href="#transformers-架构图" class="headerlink" title="transformers 架构图"></a>transformers 架构图</h4><p><img src="/2020/08/05/transformers-self-attention/sa17.png" style="zoom: 45%;"><br>这个图实际为Seq2seq model，以中译英为例（机器学习—&gt; machine learning）</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -390,7 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sequence"><span class="nav-number">1.</span> <span class="nav-text">Sequence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-attention"><span class="nav-number">2.</span> <span class="nav-text">self-attention</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sequence"><span class="nav-number">1.</span> <span class="nav-text">Sequence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-attention"><span class="nav-number">2.</span> <span class="nav-text">self-attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-head-self-attention"><span class="nav-number">3.</span> <span class="nav-text">Multi-head self-attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">4.</span> <span class="nav-text">Positional Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Seq2seq-with-Attention"><span class="nav-number">5.</span> <span class="nav-text">Seq2seq with Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transformers-架构图"><span class="nav-number">6.</span> <span class="nav-text">transformers 架构图</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -472,7 +523,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">22k</span>
+    <span title="站点总字数">23k</span>
 </div>
 <!--
   <div class="powered-by">
@@ -566,6 +617,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
