@@ -20,16 +20,16 @@
     var CONFIG = {"hostname":"happyzxy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true,"onmobile":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1、What is the defination of state-of-the-art(SOTA)performance?2、What is the baseline pipeline?2、What is the pipeline? 1、SOTASOTA可以简单理解为：最高性能指标，一般搞人工智能方面的，提出的方法要达到这个标准，才能表明你的方法先进、顶级。但是也不能功利心这么强吧， 2、bas">
+  <meta name="description" content="1、What is the defination of state-of-the-art(SOTA)performance?2、What is the baseline pipeline?3、What is the pipeline? 1、SOTASOTA可以简单理解为：最高性能指标，一般搞人工智能方面的，提出的方法要达到这个标准，才能表明你的方法先进、顶级。但是也不能功利心这么强吧， 2、bas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习入men篇">
 <meta property="og:url" content="https://happyzxy.github.io/2020/07/28/ji-qi-xue-xi-ru-men-pian/index.html">
 <meta property="og:site_name" content="浅忆">
-<meta property="og:description" content="1、What is the defination of state-of-the-art(SOTA)performance?2、What is the baseline pipeline?2、What is the pipeline? 1、SOTASOTA可以简单理解为：最高性能指标，一般搞人工智能方面的，提出的方法要达到这个标准，才能表明你的方法先进、顶级。但是也不能功利心这么强吧， 2、bas">
+<meta property="og:description" content="1、What is the defination of state-of-the-art(SOTA)performance?2、What is the baseline pipeline?3、What is the pipeline? 1、SOTASOTA可以简单理解为：最高性能指标，一般搞人工智能方面的，提出的方法要达到这个标准，才能表明你的方法先进、顶级。但是也不能功利心这么强吧， 2、bas">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://happyzxy.github.io/2020/07/28/ji-qi-xue-xi-ru-men-pian/01.png">
 <meta property="article:published_time" content="2020-07-28T14:03:38.000Z">
-<meta property="article:modified_time" content="2020-07-29T13:09:56.144Z">
+<meta property="article:modified_time" content="2020-08-09T03:11:03.931Z">
 <meta property="article:author" content="Zhappy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://happyzxy.github.io/2020/07/28/ji-qi-xue-xi-ru-men-pian/01.png">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-29 21:09:56" itemprop="dateModified" datetime="2020-07-29T21:09:56+08:00">2020-07-29</time>
+                <time title="修改时间：2020-08-09 11:11:03" itemprop="dateModified" datetime="2020-08-09T11:11:03+08:00">2020-08-09</time>
               </span>
 
           
@@ -213,7 +213,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>464</span>
+              <span>765</span>
             </span>
 
         </div>
@@ -225,10 +225,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>1、What is the defination of state-of-the-art(SOTA)performance?</strong><br><strong>2、What is the baseline pipeline?</strong><br><strong>2、What is the pipeline?</strong></p>
+        <p><strong>1、What is the defination of state-of-the-art(SOTA)performance?</strong><br><strong>2、What is the baseline pipeline?</strong><br><strong>3、What is the pipeline?</strong></p>
 <h4 id="1、SOTA"><a href="#1、SOTA" class="headerlink" title="1、SOTA"></a>1、SOTA</h4><p>SOTA可以简单理解为：最高性能指标，一般搞人工智能方面的，提出的方法要达到这个标准，才能表明你的方法先进、顶级。<br>但是也不能功利心这么强吧，<br><img src="/2020/07/28/ji-qi-xue-xi-ru-men-pian/01.png" style="zoom: 75%;"></p>
 <h4 id="2、baseline"><a href="#2、baseline" class="headerlink" title="2、baseline"></a>2、baseline</h4><p>baseline一词应该指的是对照组，基准线，就是你这个实验有提升，那么你的提升是对比于什么的提升，被对比的就是baseline。比如你要研究一个新的模型，你是在前人的模型基础上新增加了一些组件，别人也基本都是在这个模型上进行修改，那这个模型就叫做baseline model——基准模型。听名字就能听出来，就是你自己模型的一个基准，一个基本的框架，模型再复杂，最根本的框架是差不多的。</p>
 <h4 id="3、pipeline"><a href="#3、pipeline" class="headerlink" title="3、pipeline"></a>3、pipeline</h4><p>pipeline是机器学习算法的基础架构。流水线包括<br>（1）数据读取<br>（2) 数据预处理<br>（3）创建模型<br>（4）评估模型结果<br>（5）模型调参<br>（6）实际应用</p>
+<h4 id="4、sentiment-lexicon"><a href="#4、sentiment-lexicon" class="headerlink" title="4、sentiment lexicon"></a>4、sentiment lexicon</h4><ul>
+<li><p><code>HowNet</code> is commonly used as a sentiment dictionary for analyzing Chinese texts</p>
+</li>
+<li><p><code>SentiWordNet</code> is conmmonly used to analyze English texts. ( Stefano Baccianella, Andrea Esuli, and Fabrizio Sebastiani. 2010. SentiWordNet 3.0: An Enhanced<br>Lexical Resource for Sentiment Analysis and Opinion Mining. Proceedings of LREC 10.)</p>
+</li>
+</ul>
+<h4 id="5、-各大会议"><a href="#5、-各大会议" class="headerlink" title="5、 各大会议"></a>5、 各大会议</h4><p>ICML</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -373,7 +380,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、SOTA"><span class="nav-number">1.</span> <span class="nav-text">1、SOTA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、baseline"><span class="nav-number">2.</span> <span class="nav-text">2、baseline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、pipeline"><span class="nav-number">3.</span> <span class="nav-text">3、pipeline</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、SOTA"><span class="nav-number">1.</span> <span class="nav-text">1、SOTA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、baseline"><span class="nav-number">2.</span> <span class="nav-text">2、baseline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、pipeline"><span class="nav-number">3.</span> <span class="nav-text">3、pipeline</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、sentiment-lexicon"><span class="nav-number">4.</span> <span class="nav-text">4、sentiment lexicon</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、-各大会议"><span class="nav-number">5.</span> <span class="nav-text">5、 各大会议</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -389,20 +396,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -455,7 +462,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">23k</span>
+    <span title="站点总字数">26k</span>
 </div>
 <!--
   <div class="powered-by">

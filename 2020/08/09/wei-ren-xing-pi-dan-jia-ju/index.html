@@ -20,42 +20,20 @@
     var CONFIG = {"hostname":"happyzxy.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true,"onmobile":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于this model leverages mass “self-attention” layers，seq2seq在transformers-seq2seq篇已经解释过，接下来将对self-attention进行描述注：本片博客是看李宏毅老师教学视频后的课程笔记 Sequence">
+  <meta name="description" content="2020&#x2F;2&#x2F;15 “如果给你寄一本书，我不会寄诗歌；我要给你一本关于植物，关于庄稼的；  告诉你稻子和稗子的区别；告诉你一棵稗子，提心吊胆的春天”  所有的喜欢不一定要有结果，遇见已经很幸运啦！  2020&#x2F;2&#x2F;16 一个人要做一件事，总会拿出理由来，一个大国定了一种政策，总会采取名正言顺的手段。有时你同别人争辩，就已经承认对方的理由有争辩之价值。 忧郁是因为自己的无能，烦恼是由于欲望得不到满足">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Transformers-self attention">
-<meta property="og:url" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/index.html">
+<meta property="og:title" content="为人性僻耽佳句">
+<meta property="og:url" content="https://happyzxy.github.io/2020/08/09/wei-ren-xing-pi-dan-jia-ju/index.html">
 <meta property="og:site_name" content="浅忆">
-<meta property="og:description" content="transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于this model leverages mass “self-attention” layers，seq2seq在transformers-seq2seq篇已经解释过，接下来将对self-attention进行描述注：本片博客是看李宏毅老师教学视频后的课程笔记 Sequence">
+<meta property="og:description" content="2020&#x2F;2&#x2F;15 “如果给你寄一本书，我不会寄诗歌；我要给你一本关于植物，关于庄稼的；  告诉你稻子和稗子的区别；告诉你一棵稗子，提心吊胆的春天”  所有的喜欢不一定要有结果，遇见已经很幸运啦！  2020&#x2F;2&#x2F;16 一个人要做一件事，总会拿出理由来，一个大国定了一种政策，总会采取名正言顺的手段。有时你同别人争辩，就已经承认对方的理由有争辩之价值。 忧郁是因为自己的无能，烦恼是由于欲望得不到满足">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/rnn01.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/cnn01.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/cnn02.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/cnn03.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa01.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa02.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa03.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa05.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa04.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa06.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa07.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa08.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa09.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa10.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa12.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa11.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa13.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa14.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa15.png">
-<meta property="og:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/sa17.png">
-<meta property="article:published_time" content="2020-08-05T10:39:32.000Z">
-<meta property="article:modified_time" content="2020-08-05T16:18:45.170Z">
+<meta property="article:published_time" content="2020-08-09T01:59:53.000Z">
+<meta property="article:modified_time" content="2020-08-09T04:34:13.405Z">
 <meta property="article:author" content="Zhappy">
-<meta property="article:tag" content="transformers">
-<meta property="article:tag" content="self attention">
+<meta property="article:tag" content="饭后小酌">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://happyzxy.github.io/2020/08/05/transformers-self-attention/rnn01.png">
 
-<link rel="canonical" href="https://happyzxy.github.io/2020/08/05/transformers-self-attention/">
+<link rel="canonical" href="https://happyzxy.github.io/2020/08/09/wei-ren-xing-pi-dan-jia-ju/">
 
 
 <script id="page-configurations">
@@ -68,7 +46,7 @@
   };
 </script>
 
-  <title>Transformers-self attention | 浅忆</title>
+  <title>为人性僻耽佳句 | 浅忆</title>
   
 
 
@@ -188,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/08/05/transformers-self-attention/">
+    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/08/09/wei-ren-xing-pi-dan-jia-ju/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/ava1.png">
@@ -201,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Transformers-self attention
+          为人性僻耽佳句
         </h1>
 
         <div class="post-meta">
@@ -210,23 +188,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-08-05 18:39:32" itemprop="dateCreated datePublished" datetime="2020-08-05T18:39:32+08:00">2020-08-05</time>
+              <time title="创建时间：2020-08-09 09:59:53 / 修改时间：12:34:13" itemprop="dateCreated datePublished" datetime="2020-08-09T09:59:53+08:00">2020-08-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-06 00:18:45" itemprop="dateModified" datetime="2020-08-06T00:18:45+08:00">2020-08-06</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/pre-trained-LM/" itemprop="url" rel="index"><span itemprop="name">pre-trained LM</span></a>
+                  <a href="/categories/%E5%87%80%E5%9C%9F/" itemprop="url" rel="index"><span itemprop="name">净土</span></a>
                 </span>
             </span>
 
@@ -255,48 +227,98 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于<strong>this model leverages mass “self-attention” layers</strong>，seq2seq在transformers-seq2seq篇已经解释过，接下来将对<code>self-attention</code>进行描述<br>注：本片博客是看李宏毅老师教学视频后的课程笔记</p>
-<h4 id="Sequence"><a href="#Sequence" class="headerlink" title="Sequence"></a>Sequence</h4><p>对一个句子，之前多是使用RNN（Recurrent Neural Network）进行single direction or bidirection 处理<br>，但是RNN的计算不容易并行化，如下图1中所示：<img src="/2020/08/05/transformers-self-attention/rnn01.png" style="zoom: 45%;"> </p><p align="center"><font size="2"><strong>图 1 RNN model</strong></font></p><p></p>
-<p><font color="blue" size="3">当为单向时，已知b1，b2才可得b2；已知b1，b2，b3才可得b3，也就是说，如果是双向，它需要看完整条sequence。</font><br>用CNN去解决这个问题时，如下图2所示，图中：<br><strong>  Step1. </strong><img src="/2020/08/05/transformers-self-attention/cnn01.png" style="zoom: 45%;"><br><strong>  Step2.</strong><img src="/2020/08/05/transformers-self-attention/cnn02.png" style="zoom: 45%;"></p><p align="center"><font size="2"><strong>图 2 CNN model</strong></font></p><br>filter（橙色三角形，CNN中的概念），filter与step选取的subsequent进行inner product 得出一个数值（橙色圆形表示）,<strong>filters in higher layer can consider longer sequence </strong><img src="/2020/08/05/transformers-self-attention/cnn03.png" style="zoom: 45%;"><p align="center"><font size="2"><strong>图 3 CNN model layers</strong></font></p>也就是对于一个长句子，它需要很多层的叠加，才能看完整个句子，有点耗时耗力。<p></p>
-<h4 id="self-attention"><a href="#self-attention" class="headerlink" title="self-attention"></a>self-attention</h4><p>基于上述的研究过程及其问题，self-attention目的做到rnn做到的，所以self-attention layer 的output和input和rnn是一样的<strong>输入一个sequence，输出another sequence</strong>，首次在<code>https://arxiv.org/abs/1706.03762</code>中提出的。<br><img src="/2020/08/05/transformers-self-attention/sa01.png" style="zoom: 45%;"></p>
-<p align="center"><font size="2"><strong>图 4 self-attention（a）</strong></font></p>
-$ q: $query(to match others) <p align="center">$ q^i = W^qa^i $</p>
-$ k: $key(to be matched) <p align="center">$ k^i = W^ka^i $</p>
-$ v: $information to be extracted <p align="center">$ v^i = W^va^i $</p>
-input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，下面进入self-attention layer ,序列$a^1,a^2,...,a^n$分别乘以不同的矩阵（transformation），产生三个不同的vector，分别称为`q k v`。
-<p>
-</p><p><strong>Step1. 每个query q 去对每个key k 做attention （attention的作用是对所输入的向量计算其相似度，output a score </strong></p>
-<img src="/2020/08/05/transformers-self-attention/sa02.png" style="zoom: 45%;">这里使用 Scaled Dot-Product Attention :$ a_{1,i}= \frac{q^1*k^i}{\sqrt{d}}$ ，其中d是和q,k的dimension。
-<p>
-</p><p><strong>  Step2. soft-max </strong></p>
-<img src="/2020/08/05/transformers-self-attention/sa03.png" style="zoom: 45%;">
-<p align="center"><font size="2"><strong>图 5 self-attention（b）</strong></font></p>其中，$ \hat{a}_{1,i}= \frac{exp(a_{1,i})}{\sum_{j}exp(a_{1,j})}$
-<p>
-</p><p><strong>  Step3. key k </strong></p>
-<img src="/2020/08/05/transformers-self-attention/sa05.png" style="zoom: 33%;"><p>
-<img src="/2020/08/05/transformers-self-attention/sa04.png" style="zoom: 45%;">
-</p><p align="center"><font size="2"><strong>图 6 self-attention（c）</strong></font></p>
-其中，$$ b^{1}=\sum_{i}\hat{a}_{1,i}v^i $$，$b^1$considers the whole sequence，$v^i$的值是由$a^i$transformation而来，如果要考虑某个$a^i$，只需调整$ \hat{a}_{1,i} $
-同理，并行计算$b^{2}$，$b^{3}$，$b^{4}$,...,$b^{n}$同样平行计算
-<img src="/2020/08/05/transformers-self-attention/sa06.png" style="zoom: 45%;">
-<p align="center"><font size="2"><strong>图 7 平行化计算（a）</strong></font></p>
-可能上述中平行化还不是很明显，以下面形式表达更为明了
-<img src="/2020/08/05/transformers-self-attention/sa07.png" style="zoom: 45%;">
-<img src="/2020/08/05/transformers-self-attention/sa08.png" style="zoom: 45%;">
-<img src="/2020/08/05/transformers-self-attention/sa09.png" style="zoom: 45%;">
-<p align="center"><font size="2"><strong>图 8 平行化计算（b）</strong></font></p>
-那么整个self attention过程就可以简化为（GPU可以加速矩阵乘法）：
-<img src="/2020/08/05/transformers-self-attention/sa10.png" style="zoom: 45%;">
-<p align="center"><font size="2"><strong>图 9 平行化计算（c）</strong></font></p>
-
-
-<h4 id="Multi-head-self-attention"><a href="#Multi-head-self-attention" class="headerlink" title="Multi-head self-attention"></a>Multi-head self-attention</h4><p>self attention的变形—Multi-head self attention，以2 heads 为例<br><img src="/2020/08/05/transformers-self-attention/sa12.png" style="zoom: 35%;"><br><img src="/2020/08/05/transformers-self-attention/sa11.png" style="zoom: 45%;"></p>
-<p></p><p align="center"><font size="2"><strong>图 10 Multi-head </strong></font></p><br>$W^{0}$在降维中使用，因为$b^{i,1}$和$b^{i,2}$的连接<p></p>
-<h4 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h4><p>在self attention中，么有位置信息，原始paper中是手动s设置position information $e^i$<br><img src="/2020/08/05/transformers-self-attention/sa13.png" style="zoom: 55%;"></p>
-<p></p><p align="center"><font size="2"><strong>图 11 位置信息（a） </strong></font></p><br><strong><font color="blue">这里关于“+”，可以理解成，在each $x^i$ 后appends a one-hot vector $p^i$，$p^i$中记录了位置信息</font></strong><br><img src="/2020/08/05/transformers-self-attention/sa14.png" style="zoom: 45%;"><p></p>
-<p></p><p align="center"><font size="2"><strong>图 12 位置信息（b） </strong></font></p><br>$W^p$为公式计算所得，它的含义如下所示<br><img src="/2020/08/05/transformers-self-attention/sa15.png" style="zoom: 45%;"><br>图意不理解<p></p>
-<h4 id="Seq2seq-with-Attention"><a href="#Seq2seq-with-Attention" class="headerlink" title="Seq2seq with Attention"></a>Seq2seq with Attention</h4><p>一般的Seq2seq model是用RNN做的，如果结合attention则是这样的效果，<a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" target="_blank" rel="noopener">google提供了可视化效果展示</a></p>
-<h4 id="transformers-架构图"><a href="#transformers-架构图" class="headerlink" title="transformers 架构图"></a>transformers 架构图</h4><p><img src="/2020/08/05/transformers-self-attention/sa17.png" style="zoom: 45%;"><br>这个图实际为Seq2seq model，以中译英为例（机器学习—&gt; machine learning）</p>
+        <h5 id="2020-2-15"><a href="#2020-2-15" class="headerlink" title="2020/2/15"></a>2020/2/15</h5><ul>
+<li>“如果给你寄一本书，我不会寄诗歌；我要给你一本关于植物，关于庄稼的；</li>
+</ul>
+<p>告诉你稻子和稗子的区别；告诉你一棵稗子，提心吊胆的春天”</p>
+<ul>
+<li>所有的喜欢不一定要有结果，遇见已经很幸运啦！</li>
+</ul>
+<h5 id="2020-2-16"><a href="#2020-2-16" class="headerlink" title="2020/2/16"></a>2020/2/16</h5><ul>
+<li>一个人要做一件事，总会拿出理由来，一个大国定了一种政策，总会采取名正言顺的手段。有时你同别人争辩，就已经承认对方的理由有争辩之价值。</li>
+<li>忧郁是因为自己的无能，烦恼是由于欲望得不到满足，暴躁是一种虚怯的表现。</li>
+</ul>
+<h5 id="2020-2-23"><a href="#2020-2-23" class="headerlink" title="2020/2/23"></a>2020/2/23</h5><ul>
+<li>中国的吉卜赛人</li>
+<li>在一个人的思想还没有强大到自己能完全把握自己的时候，就需要在精神上依托另一个比自己更强的人。  —《平凡的世界》</li>
+<li>夜晚本来就很黑，为什么要和白天一样亮？ —《梦》 黑泽明</li>
+<li>我不喜欢恍若白昼的夜空，这样就看不到星星。  —《梦》 黑泽明</li>
+</ul>
+<h5 id="2020-2-25"><a href="#2020-2-25" class="headerlink" title="2020/2/25"></a>2020/2/25</h5><ul>
+<li>一个有勇气从灾难中站起来的民族，是不可小觑的</li>
+<li>在美名盛誉的战争都是一场惨绝的屠杀。</li>
+<li>落红委地，难归枝头</li>
+<li>整饬井然</li>
+<li>西瓜子长成西瓜的样子</li>
+</ul>
+<hr>
+<h5 id="2020-3-1"><a href="#2020-3-1" class="headerlink" title="2020/3/1"></a>2020/3/1</h5><ul>
+<li>仅一夜之间，我的心判若两人，他自人山人海中来，原来只是为给我一场空欢喜。你来时携风带雨，我无处可避，你走时乱了四季，我久病难医。</li>
+</ul>
+<h5 id="2020-3-3"><a href="#2020-3-3" class="headerlink" title="2020/3/3"></a>2020/3/3</h5><ul>
+<li>西方有句谚语：手里拿三年锤子，看什么都是钉子。如果一个人的本事只会抡大锤，那他解决问题的方法就是拿锤子砸。</li>
+<li>孔雀东南飞，五里一徘徊。</li>
+<li>这个世纪疯狂，没人性，腐败；你却一直清醒，温柔，一尘不染。</li>
+<li>从童年起，我便独自一人，照顾着历代星辰。</li>
+</ul>
+<h5 id="2020-3-6"><a href="#2020-3-6" class="headerlink" title="2020/3/6"></a>2020/3/6</h5><ul>
+<li>那日，绿叶渗光，颤抖地站在山顶，抬头却看到了连绵不绝的高山，迎面来的是凉风    —随笔</li>
+</ul>
+<h5 id="2020-3-9"><a href="#2020-3-9" class="headerlink" title="2020/3/9"></a>2020/3/9</h5><ul>
+<li>我现在内心时空旷如平原，汹涌时如暗流涌动的大海，我好像一直被什么东西压迫着、嘲弄着，久久不息，所以现在的我还需要流浪和成长。—随笔</li>
+<li>“春天的原野里，你一个人正走着，对面走来的是一只可爱的小熊，浑身的毛活像天鹅绒，眼睛圆鼓鼓的，它这么对你说：‘你好，小姐，和我一块儿打滚玩好么？’，接着，你就和小熊抱在一起，顺着长满三叶草的山坡咕噜咕噜滚下去，整整玩了一大天。” 你说棒不棒，太棒了</li>
+</ul>
+<h5 id="2020-3-23"><a href="#2020-3-23" class="headerlink" title="2020/3/23"></a>2020/3/23</h5><ul>
+<li>《我爱你》</li>
+</ul>
+<p>​    余秀华</p>
+<p>巴巴地活着，每天打水，煮饭，按时吃药</p>
+<p>阳光好的时候就把自己放进去，像一块陈皮</p>
+<p>茶叶轮换着喝：菊花，茉莉，玫瑰，柠檬</p>
+<p>这些美好的事物仿佛把我往春天的路上带</p>
+<p>所以我一次次按住内心的雪</p>
+<p>他们过于洁白过于接近春天</p>
+<p>在干净的院子里读你的诗歌，这人间情事</p>
+<p>恍惚如突然飞过的麻雀儿</p>
+<p>而光阴皎洁。我不适宜肝肠寸断</p>
+<p>如果给你寄一本书，我不会寄给你诗歌</p>
+<p>我要给你一本关于植物，关于庄稼的</p>
+<p>告诉你稻子和稗子的区别</p>
+<p>告诉你一个稗子提心吊胆的</p>
+<p>春天。</p>
+<ul>
+<li>向日葵花语：入目无他人，四下皆是你    有你时，我目不转睛，无你时，我谁也不见</li>
+<li>倘若你的眼睛真是这样冷，在你的鉴照下，有个人的心会结成冰。    ——《西山的月》 沈从文</li>
+<li>“剥削寻雪，烧灯续昼”  ——《踏莎行 · 其五元夕》</li>
+<li>你说你孤独，就像很久前，火星照耀十三个州府</li>
+</ul>
+<h5 id="2020-3-24"><a href="#2020-3-24" class="headerlink" title="2020/3/24"></a>2020/3/24</h5><ul>
+<li>和你在一起的时光，全都很耀眼</li>
+</ul>
+<p>因为天气好，因为天气不好</p>
+<p>因为天气刚刚好，每一天 都很好     ——《孤独而又灿烂的神》</p>
+<h5 id="2020-3-31"><a href="#2020-3-31" class="headerlink" title="2020/3/31"></a>2020/3/31</h5><p>来到最南端的垦丁，他看到了红豆，林子里，树丛里，一颗颗，一串串，一蓬蓬，一挂挂，沿街店铺里，大瓶小瓶，大罐小罐，各种器形的玻璃体，满满的收纳，透壁而出艳红，艳红得诱人，就有一种危险似的。他想起红豆的又一个称谓，相思豆，心中一惊。他的恩欠，他的愧受，他的困因，他的原罪，他的蛊，忽得一个名字，这名字就叫相思。</p>
+<hr>
+<h5 id="2020-4-1"><a href="#2020-4-1" class="headerlink" title="2020/4/1"></a>2020/4/1</h5><ul>
+<li>我把整个灵魂都给你，连同它的怪癖，耍小脾气，忽明忽暗，一千零八百种坏毛病，它真讨厌，只有一点好，爱你</li>
+</ul>
+<p>​                                                                                ——王小波</p>
+<ul>
+<li>如果余生还有三日，我也想不出任何庆祝或纪念性活动，索性还是照旧吧。</li>
+<li>世间万物都安然运转，人人都为自己着想，各自为生   ——村上春树</li>
+</ul>
+<h5 id="2020-4-1-1"><a href="#2020-4-1-1" class="headerlink" title="2020/4/1"></a>2020/4/1</h5><p>人类曾经有一个理想，建立一个没有剥削与压迫的快乐之国，但最终还是失败了，也许是败给了人性，也许是败给了时代。总之，那个雄伟的国度在一片目瞪口呆中凋零了，那个理想以一种并不光彩的方式终结了。它的敌人一边傲慢得意，一边心有余悸地打量着周边的国家，唯怕它死灰复燃。</p>
+<h5 id="2020-4-11"><a href="#2020-4-11" class="headerlink" title="2020/4/11"></a>2020/4/11</h5><p>陀思妥耶夫斯基：《罪与罚》、《卡拉马佐夫兄弟》</p>
+<h5 id="2020-4-13"><a href="#2020-4-13" class="headerlink" title="2020/4/13"></a>2020/4/13</h5><p> 不要温顺地走进那个良夜 </p>
+<p>激情不能被消沉的暮色淹没 </p>
+<p>咆哮吧 咆哮 </p>
+<p>痛斥那光的退缩 </p>
+<p>​                            ——英国诗人狄兰·托马斯</p>
+<h5 id="2020-4-29"><a href="#2020-4-29" class="headerlink" title="2020/4/29"></a>2020/4/29</h5><p>我喜欢旅行中，不喜欢开始，太过于激动和憧憬，不喜欢结束，免不了悲伤和不舍，喜欢在路上的感觉，那一切都有可能发生也有可能永不发生の感觉，那路边的花花草草，那阳光炽热の刺眼，哎呀！太开心了，想蹦蹦跳跳摇呀摇地走了</p>
+<hr>
+<h5 id="2020-8-9"><a href="#2020-8-9" class="headerlink" title="2020/8/9"></a>2020/8/9</h5><p>一个能升起月亮的身体，必然托住了无数次日落    ——《荒漠》 余秀华</p>
+<p>我身体里的火车从来不会错轨，所以允许大雪，风暴，泥石流和荒谬     ——《我身体里也有一列火车》  余秀华</p>
+<p>我的黑暗和光芒都是月光无法劝说的 ，无以为继   ——《无以为继》  余秀华</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -360,7 +382,7 @@ input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://happyzxy.github.io/2020/08/05/transformers-self-attention/" title="Transformers-self attention">https://happyzxy.github.io/2020/08/05/transformers-self-attention/</a>
+    <a href="https://happyzxy.github.io/2020/08/09/wei-ren-xing-pi-dan-jia-ju/" title="为人性僻耽佳句">https://happyzxy.github.io/2020/08/09/wei-ren-xing-pi-dan-jia-ju/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -372,11 +394,8 @@ input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/transformers/" rel="tag">
-              <i class="fa fa-tag"> transformers</i>
-              </a>
-              <a href="/tags/self-attention/" rel="tag">
-              <i class="fa fa-tag"> self attention</i>
+              <a href="/tags/%E9%A5%AD%E5%90%8E%E5%B0%8F%E9%85%8C/" rel="tag">
+              <i class="fa fa-tag"> 饭后小酌</i>
               </a>
           </div>
 
@@ -447,7 +466,7 @@ input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sequence"><span class="nav-number">1.</span> <span class="nav-text">Sequence</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-attention"><span class="nav-number">2.</span> <span class="nav-text">self-attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-head-self-attention"><span class="nav-number">3.</span> <span class="nav-text">Multi-head self-attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Positional-Encoding"><span class="nav-number">4.</span> <span class="nav-text">Positional Encoding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Seq2seq-with-Attention"><span class="nav-number">5.</span> <span class="nav-text">Seq2seq with Attention</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transformers-架构图"><span class="nav-number">6.</span> <span class="nav-text">transformers 架构图</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-2-15"><span class="nav-number">1.</span> <span class="nav-text">2020&#x2F;2&#x2F;15</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-2-16"><span class="nav-number">2.</span> <span class="nav-text">2020&#x2F;2&#x2F;16</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-2-23"><span class="nav-number">3.</span> <span class="nav-text">2020&#x2F;2&#x2F;23</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-2-25"><span class="nav-number">4.</span> <span class="nav-text">2020&#x2F;2&#x2F;25</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-3-1"><span class="nav-number">5.</span> <span class="nav-text">2020&#x2F;3&#x2F;1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-3-3"><span class="nav-number">6.</span> <span class="nav-text">2020&#x2F;3&#x2F;3</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-3-6"><span class="nav-number">7.</span> <span class="nav-text">2020&#x2F;3&#x2F;6</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-3-9"><span class="nav-number">8.</span> <span class="nav-text">2020&#x2F;3&#x2F;9</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-3-23"><span class="nav-number">9.</span> <span class="nav-text">2020&#x2F;3&#x2F;23</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-3-24"><span class="nav-number">10.</span> <span class="nav-text">2020&#x2F;3&#x2F;24</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-3-31"><span class="nav-number">11.</span> <span class="nav-text">2020&#x2F;3&#x2F;31</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-4-1"><span class="nav-number">12.</span> <span class="nav-text">2020&#x2F;4&#x2F;1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-4-1-1"><span class="nav-number">13.</span> <span class="nav-text">2020&#x2F;4&#x2F;1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-4-11"><span class="nav-number">14.</span> <span class="nav-text">2020&#x2F;4&#x2F;11</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-4-13"><span class="nav-number">15.</span> <span class="nav-text">2020&#x2F;4&#x2F;13</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-4-29"><span class="nav-number">16.</span> <span class="nav-text">2020&#x2F;4&#x2F;29</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020-8-9"><span class="nav-number">17.</span> <span class="nav-text">2020&#x2F;8&#x2F;9</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -463,20 +482,20 @@ input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -529,7 +548,7 @@ input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">23k</span>
+    <span title="站点总字数">26k</span>
 </div>
 <!--
   <div class="powered-by">
@@ -623,59 +642,6 @@ input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
