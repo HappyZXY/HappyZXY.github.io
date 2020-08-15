@@ -162,6 +162,460 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/08/05/what-is-seq2seq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ava1.png">
+      <meta itemprop="name" content="Zhappy">
+      <meta itemprop="description" content="仰天大笑出门去">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅忆">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/05/what-is-seq2seq/" class="post-title-link" itemprop="url">What is seq2seq</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-05 12:29:33" itemprop="dateCreated datePublished" datetime="2020-08-05T12:29:33+08:00">2020-08-05</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+    <!--
+    <div>
+      
+    </div>  -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/08/02/transformers-self-attention/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ava1.png">
+      <meta itemprop="name" content="Zhappy">
+      <meta itemprop="description" content="仰天大笑出门去">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅忆">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/02/transformers-self-attention/" class="post-title-link" itemprop="url">Transformers-self attention</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-02 18:39:32" itemprop="dateCreated datePublished" datetime="2020-08-02T18:39:32+08:00">2020-08-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-06 15:57:22" itemprop="dateModified" datetime="2020-08-06T15:57:22+08:00">2020-08-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pre-trained-LM/" itemprop="url" rel="index"><span itemprop="name">pre-trained LM</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>transformers较为知名的应用是BERT，Transformers可以看成是seq2seq model，特点在于<strong>this model leverages mass “self-attention” layers</strong>，seq2seq在What-is-seq2seq篇已经解释过，接下来将对<code>self-attention</code>进行描述<br>注：本片博客是看李宏毅老师教学视频后的课程笔记</p>
+<h4 id="Sequence"><a href="#Sequence" class="headerlink" title="Sequence"></a>Sequence</h4><p>对一个句子，之前多是使用RNN（Recurrent Neural Network）进行single direction or bidirection 处理<br>，但是RNN的计算不容易并行化，如下图1中所示：<img src="/2020/08/02/transformers-self-attention/rnn01.png" style="zoom: 45%;"> </p><p align="center"><font size="2"><strong>图 1 RNN model</strong></font></p><p></p>
+<p><font color="blue" size="3">当为单向时，已知b1，b2才可得b2；已知b1，b2，b3才可得b3，也就是说，如果是双向，它需要看完整条sequence。</font><br>用CNN去解决这个问题时，如下图2所示，图中：<br><strong>  Step1. </strong><img src="/2020/08/02/transformers-self-attention/cnn01.png" style="zoom: 45%;"><br><strong>  Step2.</strong><img src="/2020/08/02/transformers-self-attention/cnn02.png" style="zoom: 45%;"></p><p align="center"><font size="2"><strong>图 2 CNN model</strong></font></p><br>filter（橙色三角形，CNN中的概念），filter与step选取的subsequent进行inner product 得出一个数值（橙色圆形表示）,<strong>filters in higher layer can consider longer sequence </strong><img src="/2020/08/02/transformers-self-attention/cnn03.png" style="zoom: 45%;"><p align="center"><font size="2"><strong>图 3 CNN model layers</strong></font></p>也就是对于一个长句子，它需要很多层的叠加，才能看完整个句子，有点耗时耗力。<p></p>
+<h4 id="self-attention"><a href="#self-attention" class="headerlink" title="self-attention"></a>self-attention</h4><p>基于上述的研究过程及其问题，self-attention目的做到rnn做到的，所以self-attention layer 的output和input和rnn是一样的<strong>输入一个sequence，输出another sequence</strong>，首次在<code>https://arxiv.org/abs/1706.03762</code>中提出的。<br><img src="/2020/08/02/transformers-self-attention/sa01.png" style="zoom: 45%;"></p>
+<p align="center"><font size="2"><strong>图 4 self-attention（a）</strong></font></p>
+$ q: $query(to match others) <p align="center">$ q^i = W^qa^i $</p>
+$ k: $key(to be matched) <p align="center">$ k^i = W^ka^i $</p>
+$ v: $information to be extracted <p align="center">$ v^i = W^va^i $</p>
+input:$ sequence={x^1,x^2,...,x^n} $，通过Embedding得到$a^1,a^2,...,a^n$，下面进入self-attention layer ,序列$a^1,a^2,...,a^n$分别乘以不同的矩阵（transformation），产生三个不同的vector，分别称为`q k v`。
+<p>
+</p><p><strong>Step1. 每个query q 去对每个key k 做attention （attention的作用是对所输入的向量计算其相似度，output a score </strong></p>
+<img src="/2020/08/02/transformers-self-attention/sa02.png" style="zoom: 45%;">这里使用 Scaled Dot-Product Attention :$ a_{1,i}= \frac{q^1*k^i}{\sqrt{d}}$ ，其中d是和q,k的dimension。
+<p>
+</p><p><strong>  Step2. soft-max </strong></p>
+<img src="/2020/08/02/transformers-self-attention/sa03.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 5 self-attention（b）</strong></font></p>其中，$ \hat{a}_{1,i}= \frac{exp(a_{1,i})}{\sum_{j}exp(a_{1,j})}$
+<p>
+</p><p><strong>  Step3. key k </strong></p>
+<img src="/2020/08/02/transformers-self-attention/sa05.png" style="zoom: 33%;"><p>
+<img src="/2020/08/02/transformers-self-attention/sa04.png" style="zoom: 45%;">
+</p><p align="center"><font size="2"><strong>图 6 self-attention（c）</strong></font></p>
+其中，$$ b^{1}=\sum_{i}\hat{a}_{1,i}v^i $$，$b^1$considers the whole sequence，$v^i$的值是由$a^i$transformation而来，如果要考虑某个$a^i$，只需调整$ \hat{a}_{1,i} $
+同理，并行计算$b^{2}$，$b^{3}$，$b^{4}$,...,$b^{n}$同样平行计算
+<img src="/2020/08/02/transformers-self-attention/sa06.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 7 平行化计算（a）</strong></font></p>
+可能上述中平行化还不是很明显，以下面形式表达更为明了
+<img src="/2020/08/02/transformers-self-attention/sa07.png" style="zoom: 45%;">
+<img src="/2020/08/02/transformers-self-attention/sa08.png" style="zoom: 45%;">
+<img src="/2020/08/02/transformers-self-attention/sa09.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 8 平行化计算（b）</strong></font></p>
+那么整个self attention过程就可以简化为（GPU可以加速矩阵乘法）：
+<img src="/2020/08/02/transformers-self-attention/sa10.png" style="zoom: 45%;">
+<p align="center"><font size="2"><strong>图 9 平行化计算（c）</strong></font></p>
+
+
+<h4 id="Multi-head-self-attention"><a href="#Multi-head-self-attention" class="headerlink" title="Multi-head self-attention"></a>Multi-head self-attention</h4><p>self attention的变形—Multi-head self attention，以2 heads 为例<br><img src="/2020/08/02/transformers-self-attention/sa12.png" style="zoom: 35%;"><br><img src="/2020/08/02/transformers-self-attention/sa11.png" style="zoom: 45%;"></p>
+<p></p><p align="center"><font size="2"><strong>图 10 Multi-head </strong></font></p><br>$W^{0}$在降维中使用，因为$b^{i,1}$和$b^{i,2}$的连接<p></p>
+<h4 id="Positional-Encoding"><a href="#Positional-Encoding" class="headerlink" title="Positional Encoding"></a>Positional Encoding</h4><p>在self attention中，么有位置信息，原始paper中是手动s设置position information $e^i$<br><img src="/2020/08/02/transformers-self-attention/sa13.png" style="zoom: 55%;"></p>
+<p></p><p align="center"><font size="2"><strong>图 11 位置信息（a） </strong></font></p><br><strong><font color="blue">这里关于“+”，可以理解成，在each $x^i$ 后appends a one-hot vector $p^i$，$p^i$中记录了位置信息</font></strong><br><img src="/2020/08/02/transformers-self-attention/sa14.png" style="zoom: 45%;"><p></p>
+<p></p><p align="center"><font size="2"><strong>图 12 位置信息（b） </strong></font></p><br>$W^p$为公式计算所得，它的含义如下所示<br><img src="/2020/08/02/transformers-self-attention/sa15.png" style="zoom: 45%;"><br>图意不理解<p></p>
+<h4 id="Seq2seq-with-Attention"><a href="#Seq2seq-with-Attention" class="headerlink" title="Seq2seq with Attention"></a>Seq2seq with Attention</h4><p>一般的Seq2seq model是用RNN做的，如果结合attention则是这样的效果，<a href="https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html" target="_blank" rel="noopener">google提供了可视化效果展示</a></p>
+<h4 id="transformers-架构图"><a href="#transformers-架构图" class="headerlink" title="transformers 架构图"></a>transformers 架构图</h4><p><img src="/2020/08/02/transformers-self-attention/sa17.png" style="zoom: 45%;"><br>这个图实际为Seq2seq model，以中译英为例（机器学习—&gt; machine learning），对这个图更为详细的解释便是：<br><img src="/2020/08/02/transformers-self-attention/sa18.png" style="zoom: 45%;"> <code>Add &amp; Norm</code> 意为将raw input和产生的input加起来，然后做Norm。Norm有Layer Norm（<a href="https://arxiv.org/abs/1607.06450）和Batch" target="_blank" rel="noopener">https://arxiv.org/abs/1607.06450）和Batch</a> Norm（<a href="https://www.youtube.com/watch?v=BZh1ltr5Rkg），至于其中的Masked是只attend" target="_blank" rel="noopener">https://www.youtube.com/watch?v=BZh1ltr5Rkg），至于其中的Masked是只attend</a> on the generated sequence，以最近的timestep和已翻译出来的最为下一次词翻译的参考依照。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+    <!--
+    <div>
+      
+    </div>  -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/08/01/latex-ru-men/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ava1.png">
+      <meta itemprop="name" content="Zhappy">
+      <meta itemprop="description" content="仰天大笑出门去">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅忆">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/01/latex-ru-men/" class="post-title-link" itemprop="url">LaTex 入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-01 16:07:05" itemprop="dateCreated datePublished" datetime="2020-08-01T16:07:05+08:00">2020-08-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-02 14:10:22" itemprop="dateModified" datetime="2020-08-02T14:10:22+08:00">2020-08-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Article-Writing/" itemprop="url" rel="index"><span itemprop="name">Article Writing</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.4k</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h4><p><img src="/2020/08/01/latex-ru-men/yu01.png" style="zoom: 89%;"><br><img src="/2020/08/01/latex-ru-men/yu02.png" style="zoom: 89%;"></p>
+<h4 id="第一部分——宏包及文档类型"><a href="#第一部分——宏包及文档类型" class="headerlink" title="第一部分——宏包及文档类型"></a>第一部分——宏包及文档类型</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% \documentclass[twocolumn]{cctart} </span></span><br><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[twocolumn]</span><span class="string">{article}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{graphicx}</span></span>  <span class="comment">% 插入图片</span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{caption2}</span></span>  <span class="comment">% 修改图注相关</span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{subfigure}</span></span> <span class="comment">% 用来插入并列分布的图片</span></span><br><span class="line"><span class="comment">% \usepackage{float}     % 图片是否浮动</span></span><br><span class="line"><span class="comment">% \usepackage{ctex}      % 用来编译中文字体</span></span><br></pre></td></tr></tbody></table></figure>
+<p><code>\documentclass</code>中定义文档类型为article，一般LaTeX提供三种基本文档，另外两种是report和book。三者分别用来写小篇幅的文章、中篇幅的报告和长篇幅的书籍，<code>twocolumn</code>是把文章分为了两栏。<br>第一部分是文档的导言部分，文档的全局设置及版面相关的内容都在这里进行设置，LaTeX的注释是%。</p>
+<h4 id="文章主体——body"><a href="#文章主体——body" class="headerlink" title="文章主体——body"></a>文章主体——body</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[twocolumn]</span><span class="string">{article}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{graphicx}</span></span> </span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">{document}</span></span></span><br><span class="line"><span class="tag">\<span class="name">title</span><span class="string">{Latex study}</span></span></span><br><span class="line"><span class="tag">\<span class="name">author</span><span class="string">{zhappy}</span></span></span><br><span class="line"><span class="tag">\<span class="name">section</span><span class="string">{Introduction}</span></span></span><br><span class="line">     the right content.</span><br><span class="line">    <span class="tag">\<span class="name">subsection</span><span class="string">{Design}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">par</span></span> LaTeX is based on the idea that it is better to leave document design to document designers, and to let authors get on with writing documents.</span><br><span class="line">        <span class="tag">\<span class="name">subsubsection</span><span class="string">{Latex Features}</span></span></span><br><span class="line">            Control over large documents containing sectioning, cross-references, tables and figures.</span><br><span class="line">            Typesetting of complex mathematical formulas.</span><br><span class="line"></span><br><span class="line"><span class="comment">% 参考文献</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% append</span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">{document}</span></span></span><br></pre></td></tr></tbody></table></figure>
+<p>文章的主体内容均是在其中撰写，类似于html的</p>
+<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">section</span><span class="string">{Parameter-Formula}</span></span></span><br><span class="line">    assume <span class="formula">$x^2$</span> is xxx.</span><br><span class="line">    <span class="tag">\<span class="name">subsection</span><span class="string">{Equation1}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">begin</span><span class="string">{equation}</span></span></span><br><span class="line">            <span class="tag">\<span class="name">oint</span></span></span><br><span class="line">        <span class="tag">\<span class="name">end</span><span class="string">{equation}</span></span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="图片的插入及其格式转换"><a href="#图片的插入及其格式转换" class="headerlink" title="图片的插入及其格式转换"></a>图片的插入及其格式转换</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">section</span><span class="string">{image-}</span></span></span><br><span class="line">    this is a image</span><br><span class="line">    <span class="tag">\<span class="name">begin</span><span class="string">{figure}</span><span class="string">[h]</span></span></span><br><span class="line">    <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">    <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.45\textwidth]</span><span class="string">{01.png}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">caption</span><span class="string">{sunny}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">label</span><span class="string">{bo}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">end</span><span class="string">{figure}</span></span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="tag">\<span class="name">begin</span><span class="string">{figure}</span><span class="string">[h]</span></span></span><br><span class="line">    <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">    <span class="tag">\<span class="name">subfigure</span><span class="string">[爱1.]</span><span class="string">{</span></span></span><br><span class="line"><span class="tag"><span class="string">    \includegraphics[width=0.10\textwidth]{02.png}</span></span></span><br><span class="line">}</span><br><span class="line">    <span class="tag">\<span class="name">subfigure</span><span class="string">[爱2.]</span><span class="string">{</span></span></span><br><span class="line"><span class="tag"><span class="string">    \includegraphics[width=0.10\textwidth]{03.png}</span></span></span><br><span class="line">}</span><br><span class="line">    <span class="tag">\<span class="name">caption</span><span class="string">{love}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">label</span><span class="string">{flowers}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">end</span><span class="string">{figure}</span></span></span><br><span class="line">    </span><br><span class="line">   <span class="tag">\<span class="name">begin</span><span class="string">{figure}</span><span class="string">[h]</span></span></span><br><span class="line">    <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">    <span class="tag">\<span class="name">subfigure</span><span class="string">[场景1]</span><span class="string">{</span></span></span><br><span class="line"><span class="tag"><span class="string">        \begin{minipage}</span><span class="string">[b]</span><span class="string">{0.45\textwidth}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span> <span class="tag">\<span class="name">\</span></span></span><br><span class="line">        <span class="tag">\<span class="name">vspace</span><span class="string">{10pt}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">end</span><span class="string">{minipage}</span></span></span><br><span class="line">    }</span><br><span class="line">   <span class="tag">\<span class="name">end</span><span class="string">{figure}</span></span></span><br></pre></td></tr></tbody></table></figure>
+<p>需要分行显示的话，则需minipage环境<code>\begin{minipage} \end{minipage}</code>。在要换行的图片后加<code>\</code>表示换行，这样<code>\vspace</code>才能起效果。<font color="blue" size="2">\vspace 用来改变上下图片之间的距离，值为正增加距离，值为负减少距离</font></p>
+<font size="2">需转化的图片放在winedt相同的目录下，<strong>shift+鼠标右键</strong>打开命令窗口，在powershell中输入`bmeps -c image.png test.eps`</font>
+
+
+
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">{thebibliography}</span><span class="string">{90}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">bibitem</span><span class="string">{article1}</span></span></span><br><span class="line">        bibitem-article</span><br><span class="line">    <span class="tag">\<span class="name">bibitem</span><span class="string">{book1}</span></span></span><br><span class="line">        bibitem-book</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">{thebibliography}</span></span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="append"><a href="#append" class="headerlink" title="append"></a>append</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">{appendix}</span></span></span><br><span class="line">    this is appendix</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">{appendix}</span></span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="关于分栏"><a href="#关于分栏" class="headerlink" title="关于分栏"></a>关于分栏</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">twocolumn</span><span class="string">[</span></span></span><br><span class="line"><span class="tag"><span class="string">    \begin{@twocolumnfalse}</span></span></span><br><span class="line"><span class="tag"><span class="string">    \maketitle</span></span></span><br><span class="line"><span class="tag"><span class="string">        \begin{abstract}</span></span></span><br><span class="line"><span class="tag"><span class="string">            \par LaTeX is a high-quality typesetting system; it includes features designed for the production of technical and scientific documentation. LaTeX is the de facto standard for the communication and publication of scientific documents. LaTeX is available as free software.</span></span></span><br><span class="line"><span class="tag"><span class="string">        \end{abstract}</span></span></span><br><span class="line"><span class="tag"><span class="string">    \end{@twocolumnfalse}</span></span></span><br><span class="line"><span class="tag"><span class="string">]</span></span></span><br></pre></td></tr></tbody></table></figure>
+<p>如abstract这种不需要分栏的，则可以这样修改</p>
+<h4 id="Bug们"><a href="#Bug们" class="headerlink" title="Bug们"></a>Bug们</h4><p>Ctex中，console输出：Missing \endcsname inserted 修复方法<br><img src="/2020/08/01/latex-ru-men/bug01.png" style="zoom: 100%;"><br><strong>解决方法</strong>将除.tex 外生成的文件（.aux, .bbl, .blg, .lof, .log, .lot, .out, .synctex(busy), .toc ）都删除,然后重新编译</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://www.jianshu.com/p/d41546dff228" target="_blank" rel="noopener">https://www.jianshu.com/p/d41546dff228</a><br><a href="https://blog.csdn.net/zhuoyuezai/article/details/89684664" target="_blank" rel="noopener">https://blog.csdn.net/zhuoyuezai/article/details/89684664</a><br><a href="https://blog.csdn.net/u010801696/article/details/79421864" target="_blank" rel="noopener">https://blog.csdn.net/u010801696/article/details/79421864</a></p>
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><figure class="highlight tex"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% \documentclass[twocolumn]{cctart}</span></span><br><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">[twocolumn]</span><span class="string">{article}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{graphicx}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{caption2}</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">{subfigure}</span></span></span><br><span class="line"><span class="comment">%\usepackage{float}</span></span><br><span class="line"><span class="comment">%\usepackage{ctex}</span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">{document}</span></span></span><br><span class="line"><span class="tag">\<span class="name">title</span><span class="string">{Latex study}</span></span></span><br><span class="line"><span class="tag">\<span class="name">author</span><span class="string">{zhappy}</span></span></span><br><span class="line"><span class="tag">\<span class="name">twocolumn</span><span class="string">[</span></span></span><br><span class="line"><span class="tag"><span class="string">    \begin{@twocolumnfalse}</span></span></span><br><span class="line"><span class="tag"><span class="string">    \maketitle</span></span></span><br><span class="line"><span class="tag"><span class="string">        \begin{abstract}</span></span></span><br><span class="line"><span class="tag"><span class="string">            \par LaTeX is a high-quality typesetting system; it includes features designed for the production of technical and scientific documentation. LaTeX is the de facto standard for the communication and publication of scientific documents. LaTeX is available as free software.</span></span></span><br><span class="line"><span class="tag"><span class="string">        \end{abstract}</span></span></span><br><span class="line"><span class="tag"><span class="string">    \end{@twocolumnfalse}</span></span></span><br><span class="line"><span class="tag"><span class="string">]</span></span></span><br><span class="line"><span class="tag">\<span class="name">section</span><span class="string">{Introduction}</span></span></span><br><span class="line">    LaTeX is a document preparation system for high-quality typesetting. It is most often used for medium-to-large technical or scientific documents but it can be used for almost any form of publishing.</span><br><span class="line">    LaTeX is not a word processor! Instead, LaTeX encourages authors not to worry too much about the appearance of their documents but to concentrate on getting the right content.</span><br><span class="line">    <span class="tag">\<span class="name">subsection</span><span class="string">{Design}</span></span></span><br><span class="line">        LaTeX is based on the idea that it is better to leave document design to document designers, and to let authors get on with writing documents.</span><br><span class="line">        <span class="tag">\<span class="name">subsubsection</span><span class="string">{Latex Features}</span></span></span><br><span class="line">            Control over large documents containing sectioning, cross-references, tables and figures.</span><br><span class="line">            Typesetting of complex mathematical formulas.</span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">section</span><span class="string">{Parameter-Formula}</span></span></span><br><span class="line">    assume <span class="formula">$x^2$</span> is xxx.</span><br><span class="line">    <span class="tag">\<span class="name">subsection</span><span class="string">{Equation1}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">begin</span><span class="string">{equation}</span></span></span><br><span class="line">            <span class="tag">\<span class="name">oint</span></span> x^{2}+yz^{3}</span><br><span class="line">        <span class="tag">\<span class="name">end</span><span class="string">{equation}</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">section</span><span class="string">{image-}</span></span></span><br><span class="line">    this is a image</span><br><span class="line">    <span class="tag">\<span class="name">begin</span><span class="string">{figure}</span><span class="string">[h]</span></span></span><br><span class="line">    <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">    <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.55\textwidth]</span><span class="string">{01.png}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">caption</span><span class="string">{sunny}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">label</span><span class="string">{bo}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">end</span><span class="string">{figure}</span></span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="tag">\<span class="name">begin</span><span class="string">{figure}</span><span class="string">[h]</span></span></span><br><span class="line">    <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">    <span class="tag">\<span class="name">subfigure</span><span class="string">[爱1.]</span><span class="string">{</span></span></span><br><span class="line"><span class="tag"><span class="string">    \includegraphics[width=0.10\textwidth]{02.png}</span></span></span><br><span class="line">}</span><br><span class="line">    <span class="tag">\<span class="name">subfigure</span><span class="string">[爱2.]</span><span class="string">{</span></span></span><br><span class="line"><span class="tag"><span class="string">    \includegraphics[width=0.10\textwidth]{03.png}</span></span></span><br><span class="line">}</span><br><span class="line">    <span class="tag">\<span class="name">caption</span><span class="string">{love}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">label</span><span class="string">{flowers}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">end</span><span class="string">{figure}</span></span></span><br><span class="line">    </span><br><span class="line">   <span class="tag">\<span class="name">begin</span><span class="string">{figure}</span><span class="string">[h]</span></span></span><br><span class="line">    <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">    <span class="tag">\<span class="name">subfigure</span><span class="string">[场景1]</span><span class="string">{</span></span></span><br><span class="line"><span class="tag"><span class="string">        \begin{minipage}</span><span class="string">[b]</span><span class="string">{0.45\textwidth}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">centering</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span> <span class="tag">\<span class="name">\</span></span></span><br><span class="line">        <span class="tag">\<span class="name">vspace</span><span class="string">{10pt}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">includegraphics</span><span class="string">[width=0.30\textwidth]</span><span class="string">{04.png}</span></span></span><br><span class="line">        <span class="tag">\<span class="name">end</span><span class="string">{minipage}</span></span></span><br><span class="line">    }</span><br><span class="line">   <span class="tag">\<span class="name">end</span><span class="string">{figure}</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">% 参考文献</span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">{thebibliography}</span><span class="string">{90}</span></span></span><br><span class="line">    <span class="tag">\<span class="name">bibitem</span><span class="string">{article1}</span></span></span><br><span class="line">        bibitem-article</span><br><span class="line">    <span class="tag">\<span class="name">bibitem</span><span class="string">{book1}</span></span></span><br><span class="line">        bibitem-book</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">{thebibliography}</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">{appendix}</span></span></span><br><span class="line">    this is appendix</span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">{appendix}</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">{document}</span></span></span><br></pre></td></tr></tbody></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+    <!--
+    <div>
+      
+    </div>  -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/28/ji-qi-xue-xi-ru-men-pian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ava1.png">
+      <meta itemprop="name" content="Zhappy">
+      <meta itemprop="description" content="仰天大笑出门去">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="浅忆">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/28/ji-qi-xue-xi-ru-men-pian/" class="post-title-link" itemprop="url">机器学习入men篇</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-28 22:03:38" itemprop="dateCreated datePublished" datetime="2020-07-28T22:03:38+08:00">2020-07-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-09 11:11:03" itemprop="dateModified" datetime="2020-08-09T11:11:03+08:00">2020-08-09</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>765</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>1、What is the defination of state-of-the-art(SOTA)performance?</strong><br><strong>2、What is the baseline pipeline?</strong><br><strong>3、What is the pipeline?</strong></p>
+<h4 id="1、SOTA"><a href="#1、SOTA" class="headerlink" title="1、SOTA"></a>1、SOTA</h4><p>SOTA可以简单理解为：最高性能指标，一般搞人工智能方面的，提出的方法要达到这个标准，才能表明你的方法先进、顶级。<br>但是也不能功利心这么强吧，<br><img src="/2020/07/28/ji-qi-xue-xi-ru-men-pian/01.png" style="zoom: 75%;"></p>
+<h4 id="2、baseline"><a href="#2、baseline" class="headerlink" title="2、baseline"></a>2、baseline</h4><p>baseline一词应该指的是对照组，基准线，就是你这个实验有提升，那么你的提升是对比于什么的提升，被对比的就是baseline。比如你要研究一个新的模型，你是在前人的模型基础上新增加了一些组件，别人也基本都是在这个模型上进行修改，那这个模型就叫做baseline model——基准模型。听名字就能听出来，就是你自己模型的一个基准，一个基本的框架，模型再复杂，最根本的框架是差不多的。</p>
+<h4 id="3、pipeline"><a href="#3、pipeline" class="headerlink" title="3、pipeline"></a>3、pipeline</h4><p>pipeline是机器学习算法的基础架构。流水线包括<br>（1）数据读取<br>（2) 数据预处理<br>（3）创建模型<br>（4）评估模型结果<br>（5）模型调参<br>（6）实际应用</p>
+<h4 id="4、sentiment-lexicon"><a href="#4、sentiment-lexicon" class="headerlink" title="4、sentiment lexicon"></a>4、sentiment lexicon</h4><ul>
+<li><p><code>HowNet</code> is commonly used as a sentiment dictionary for analyzing Chinese texts</p>
+</li>
+<li><p><code>SentiWordNet</code> is conmmonly used to analyze English texts. ( Stefano Baccianella, Andrea Esuli, and Fabrizio Sebastiani. 2010. SentiWordNet 3.0: An Enhanced<br>Lexical Resource for Sentiment Analysis and Opinion Mining. Proceedings of LREC 10.)</p>
+</li>
+</ul>
+<h4 id="5、-各大会议"><a href="#5、-各大会议" class="headerlink" title="5、 各大会议"></a>5、 各大会议</h4><p>ICML</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+
+    
+    
+    
+    <!--
+    <div>
+      
+    </div>  -->
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/19/shu-ju-de-yi-xie-te-xing/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -290,7 +744,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-09 20:27:18" itemprop="dateModified" datetime="2020-08-09T20:27:18+08:00">2020-08-09</time>
+                <time title="修改时间：2020-08-12 14:35:49" itemprop="dateModified" datetime="2020-08-12T14:35:49+08:00">2020-08-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -308,7 +762,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>725</span>
+              <span>759</span>
             </span>
 
         </div>
@@ -320,466 +774,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>incorporating                agj. 合并的<br>stabilize                    vt. 使稳固，使安定<br>replicate                    vt. 复制(复现)；折叠; vi. 重复；折转<br>empirical                    adj. 经验主义的，完全根据经验的；实证的<br>vicinity distribution        邻近分布<br>In a nutshell                一言以蔽之<br>preliminary                    adj. 初步的；开始的；n. 初步行动；准备工作；预赛，预试<br>relevance                     n. 相关性; 关联<br>overall                        adj. 全部的；全体的；一切在内的<br>coarse                        adj. 粗糙的；粗俗的<br>fine-grained sentiment<br>It is worth noting that        值得注意的是<br>interaction                    n. [计] 交互，相互作用；相互交流<br>integrated                    adj. 综合的；完整的；互相协调的<br>extensive                    adj. 广泛的；大量的；广阔的<br>helpfulness                    n. 有益；有助<br>prediction                    n. 预报；预测<br>interchangeably                adv. [数] 可交换地<br>be oriented towards buyers                    面向买家<br>basis[复数 bases ]            n. 基础；底部；基本原则或原理<br>vary with individuals        因人而异<br>latent factor                潜在因素<br>preliminary                    adj. 初步的；开始的；预备的<br>synonymy[复数 synonymies ]  n. 同义，同义词研究<br>comprehensively                adv. 包括地；包括一切地；完全地<br>consummation                n. 圆满成功；完成；成就<br>lexicon                        n. 词典，辞典<br>annotation                    n. 注释；注解；释文<br>with respect to               关于<br>accessory[复数 accessories ]  n. 附件<br>overall rating                总评分</p>
+          <p>incorporating                agj. 合并的<br>stabilize                    vt. 使稳固，使安定<br>replicate                    vt. 复制(复现)；折叠; vi. 重复；折转<br>empirical                    adj. 经验主义的，完全根据经验的；实证的<br>vicinity distribution        邻近分布<br>In a nutshell                一言以蔽之<br>preliminary                    adj. 初步的；开始的；n. 初步行动；准备工作；预赛，预试<br>relevance                     n. 相关性; 关联<br>overall                        adj. 全部的；全体的；一切在内的<br>coarse                        adj. 粗糙的；粗俗的<br>fine-grained sentiment<br>It is worth noting that        值得注意的是<br>interaction                    n. [计] 交互，相互作用；相互交流<br>integrated                    adj. 综合的；完整的；互相协调的<br>extensive                    adj. 广泛的；大量的；广阔的<br>helpfulness                    n. 有益；有助<br>prediction                    n. 预报；预测<br>interchangeably                adv. [数] 可交换地<br>be oriented towards buyers                    面向买家<br>basis[复数 bases ]            n. 基础；底部；基本原则或原理<br>vary with individuals        因人而异<br>latent factor                潜在因素<br>preliminary                    adj. 初步的；开始的；预备的<br>synonymy[复数 synonymies ]  n. 同义，同义词研究<br>comprehensively                adv. 包括地；包括一切地；完全地<br>consummation                n. 圆满成功；完成；成就<br>lexicon                        n. 词典，辞典<br>annotation                    n. 注释；注解；释文<br>with respect to               关于<br>accessory[复数 accessories ]  n. 附件<br>overall rating                总评分<br>at times of lockdown<br>sparse                        adj. 稀疏的；稀少的</p>
 <script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/10/lun-wen-biao-da-ci-hui-ji-lei/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/10/lun-wen-biao-da-ci-hui-ji-lei/" class="post-title-link" itemprop="url">论文表达词汇积累</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-10 20:23:11" itemprop="dateCreated datePublished" datetime="2020-07-10T20:23:11+08:00">2020-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-11 07:43:39" itemprop="dateModified" datetime="2020-07-11T07:43:39+08:00">2020-07-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Article-Writing/" itemprop="url" rel="index"><span itemprop="name">Article Writing</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>278</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>1、Motivated by these issues, we introduce a simple and data-agnostic data augmenta-<br>tion routine, <strong><font color="blue">termed mixup</font></strong> (Section 2). <strong><font color="blue">In a nutshell</font></strong>, mixup constructs virtual training examples</p>
-<p>2、The source-code necessary to <strong><font color="blue">replicate</font></strong> our CIFAR-10 experiments is available at:<br>            <a href="https://github.com/facebookresearch/mixup-cifar10" target="_blank" rel="noopener">https://github.com/facebookresearch/mixup-cifar10</a>.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/07/10/mixup-beyond-empirical-risk-minimization-wen-xian-yue-du/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/10/mixup-beyond-empirical-risk-minimization-wen-xian-yue-du/" class="post-title-link" itemprop="url">mixup:BEYOND EMPIRICAL RISK MINIMIZATION文献阅读</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-07-10 12:14:15" itemprop="dateCreated datePublished" datetime="2020-07-10T12:14:15+08:00">2020-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-28 22:05:21" itemprop="dateModified" datetime="2020-07-28T22:05:21+08:00">2020-07-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Article-Reading/" itemprop="url" rel="index"><span itemprop="name">Article Reading</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h3><p><strong>Why are neural networks sensitivity to adversarial example?</strong><br><strong>What is data augmentation?</strong><br><strong>What is MixUp</strong></p>
-<h4 id="1、the-commonalities-of-neural-networks"><a href="#1、the-commonalities-of-neural-networks" class="headerlink" title="1、the commonalities of neural networks"></a>1、the commonalities of neural networks</h4><ul>
-<li>Neurals networks are trained as to minimize their average error over the training data, a learning rule also known as the Empirical Risk Minimization(ERM)principle. However, ERM is unable to explain or provide generalization on testing distributions that differ only slightly from the training data.</li>
-<li>The size of these state-of-the-art neural networks scales linearly with the number of training example,but this will make ERM unguaranted.</li>
-</ul>
-<h3 id="2、Data-augmentation"><a href="#2、Data-augmentation" class="headerlink" title="2、Data augmentation"></a>2、Data augmentation</h3><p>The method of choice to train on similar but different examples to the training data is known as data augmentation, formalized by the Vicinal Risk Minimization(VRM) priciple. In VRM, human knowledge is required to describe a vicinity or neighborhood around each example in the training data. Then, additional virtual examole can be drawn form the vicinity distribution of the training examples to enlarge the support of the training distribution.<br>It is a technique to automatically increase the size of the training data without using human annotators. DA is shown to be effective for certain tasks in computer vison and NLP. </p>
-<ul>
-<li>In computer vision, labeled images that are augmented through simple operators such as rotate, crop, pad, filp are shown to be effective for training deep neural networks.</li>
-<li>In NLP, setences that are augmented by replacing tokens with their corresponding synonyms are shown to be effective for training sentence classifiers. However, <strong><font color="blue">in NLP tasks the use of DA is still limited, as synonym of a word are very limited and other operators can distort the meaning of the augmented sentence.</font></strong><br>Intuitively, such augmented data allow the trained model to learn properties that remain invariant in the data. <strong><font color="blue"> While data augmentation consistenly leads to improved generalization, the procedure is data-dependent, and thus requires the use of expert knowledge. Furthermore , data augmentation assumes that the examples in the vicinity share the same class, and does not model the vicinity relation across examples of different classes.</font></strong></li>
-</ul>
-<h3 id="2、MixUp"><a href="#2、MixUp" class="headerlink" title="2、MixUp"></a>2、MixUp</h3><p><img src="/2020/07/10/mixup-beyond-empirical-risk-minimization-wen-xian-yue-du/01.png" style="zoom: 75%;"></p>
-<h3 id="source-code"><a href="#source-code" class="headerlink" title="source-code"></a>source-code</h3><p>The source-code necessary to <strong><font color="blue">replicate</font></strong> our CIFAR-10 experiments is available at:<a href="https://github.com/facebookresearch/mixup-cifar10" target="_blank" rel="noopener">https://github.com/facebookresearch/mixup-cifar10</a>.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/06/27/semi-supervised-opinion-mining-with-augmented-data-wen-xian-yue-du/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/27/semi-supervised-opinion-mining-with-augmented-data-wen-xian-yue-du/" class="post-title-link" itemprop="url">《Semi-supervised Opinion Mining with Augmented Data》文献阅读</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-27 23:35:48" itemprop="dateCreated datePublished" datetime="2020-06-27T23:35:48+08:00">2020-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-05 18:40:01" itemprop="dateModified" datetime="2020-08-05T18:40:01+08:00">2020-08-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Article-Reading/" itemprop="url" rel="index"><span itemprop="name">Article Reading</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Questions"><a href="#Questions" class="headerlink" title="Questions"></a>Questions</h3><p><strong>1、What is raw meaning of semi-supervised learning?</strong><br><strong>2、What is Sinnpext system?</strong></p>
-<h3 id="Answer1：-semi-supervised-learning"><a href="#Answer1：-semi-supervised-learning" class="headerlink" title="Answer1： semi-supervised learning"></a>Answer1： semi-supervised learning</h3><p><img src="/2020/06/27/semi-supervised-opinion-mining-with-augmented-data-wen-xian-yue-du/1-1.png" style="zoom: 75%;"></p>
-<h3 id="Answer2：-Snippext-System"><a href="#Answer2：-Snippext-System" class="headerlink" title="Answer2： Snippext System"></a>Answer2： Snippext System</h3><p> 从用户生成的信息里提取aspects、opinions和sentiments，其中pre-trained language model 是一种较为成功的方法，但它需要大量的训练数据，标记训练数据需要投入大量对的人力方可获得。<strong><font color="blue">这篇文献的重点是减少标记训练数据的数量，因为标记数据获取时的准确性难保证耗时耗力</font></strong>Snippext是这篇文献中所提出的一个基于扩充数据的半监督学习意见挖掘系统。<br><img src="/2020/06/27/semi-supervised-opinion-mining-with-augmented-data-wen-xian-yue-du/001.png" style="zoom: 75%;"></p>
-<p></p><p align="center"><font size="2"><strong>图1 Overall Architecture of Snippext. MixDA augments and interpolate the labeled training sequence. $MixMatch^{NL}$ further combines labeled and unlabeled data into supervisory signal for fine-tuning the pre-trained Language Model(LM)</strong></font></p>实验数据集：hotels, restaurant, companies, etc. 它通过以下两种方法达到了早少量标记数据集上实现SOTA的新特性为以下：<br>  （1）MixDA——a new data augmentation<br>  （2）a semi-supervised learning technique<br>  spippext可以形式化为tag or span classification problems，如下图1所示：<br><img src="/2020/06/27/semi-supervised-opinion-mining-with-augmented-data-wen-xian-yue-du/01.png" style="zoom: 75%;"><br>ABSA中，Aspect and opinion term extractions 是tag task，使用IOB format<br>ASC——Aspect Sentiment Classification<br>本次实验使用basic 12-layer uncased BERT and one fully connected task-specific layer by a soft-max output layer.<p></p>
-<h4 id="符号定义"><a href="#符号定义" class="headerlink" title="符号定义"></a>符号定义</h4><p><img src="/2020/06/27/semi-supervised-opinion-mining-with-augmented-data-wen-xian-yue-du/02.png" style="zoom: 75%;"></p>
-<ul>
-<li><font color="blue" size="2"> $ M $ </font> ：Model</li>
-<li><font color="blue" size="2"> $ S=[s_1,…,s_n] $ </font> ：a sequence which inputs  </li>
-<li><font color="blue" size="2"> $ M(s)=[l_1,…,l_n], l_i \in V $ </font> ：output labels of sentence</li>
-<li><font color="blue" size="2"> $ P $ </font>： a set of spans</li>
-<li><font size="2"> $ M(S,P) \in V $ </font>
-
-</li>
-</ul>
-<h4 id="MixDA"><a href="#MixDA" class="headerlink" title="MixDA"></a>MixDA</h4><p>Inspired by the ideas of data augmentation (DA) and MixUp，the MixDA technique is introduced.It generates augmented data through (1) carefully augmenting the set of labeled sentences through a set of data augmentation operators suitable for tagging and span-classification, and (2) performing a convex interpolation on the augmented data with the original data to further reduce the noise that may occur in the augmented data. MixDA uses the resulting interpolation as the training signal.<br><strong><font color="blue">For Labeled Data</font></strong>, $ MixUp^{NL} $ uses convex interpolation technique<br><strong><font color="blue">For Unlabeled Data</font></strong>,$ MixMatch^{NL} $ guesses the labels for unlabeled data and interpolates data with guessed labels and data with known labels.<br>$ MixMatch^{NL} $ leverages $ MixUp^{NL} $</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>（1）achieve new SOTA F1/Macro-F1 scores on all four tasks<br>（2）use 1/2 or 1/3 of the original training data<br>（3）when applying it to a large rel-world hotel review corpus, Snippext extract more fine-grained opinions/customer experiences that are missed by previous methods.</p>
-<h3 id="实验评价"><a href="#实验评价" class="headerlink" title="实验评价"></a>实验评价</h3><p>four Aspect-Based Sentiment Analysis（ABSA）benchmark datasets</p>
-<ul>
-<li>Snippext extracts significantly more fine-grained opinions which enable new opportunities of downstream applications.</li>
-</ul>
-<h3 id="知识点补充"><a href="#知识点补充" class="headerlink" title="知识点补充"></a>知识点补充</h3><h4 id="1、IOB-format"><a href="#1、IOB-format" class="headerlink" title="1、IOB format"></a>1、IOB format</h4><p>The <font color="blue">B-AS/B-OP</font> tags indicate that a token is at the beginning of an aspect/opinion term, the <font color="blue">I-AS/I-OP</font> tags indicate that a token is inside an aspect/opinion term and <font color="blue">O</font> tags indicate that a token is outside of any aspect/opinion term.</p>
-<h4 id="2、pre-trained-language-model"><a href="#2、pre-trained-language-model" class="headerlink" title="2、pre-trained language model"></a>2、pre-trained language model</h4><p>BERT、XLNet</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
-      
-    </div>
-
-    
-    
-    
-    <!--
-    <div>
-      
-    </div>  -->
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://happyzxy.github.io/2020/06/20/ying-yu-yu-fa-nozheng-li/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/ava1.png">
-      <meta itemprop="name" content="Zhappy">
-      <meta itemprop="description" content="仰天大笑出门去">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="浅忆">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/20/ying-yu-yu-fa-nozheng-li/" class="post-title-link" itemprop="url">英语语法の整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-20 13:57:37" itemprop="dateCreated datePublished" datetime="2020-06-20T13:57:37+08:00">2020-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-11 22:12:35" itemprop="dateModified" datetime="2020-07-11T22:12:35+08:00">2020-07-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Article-Reading/" itemprop="url" rel="index"><span itemprop="name">Article Reading</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>159</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="1、五种句型"><a href="#1、五种句型" class="headerlink" title="1、五种句型"></a>1、五种句型</h3><ul>
-<li>主语+系统词+主语补足语(表语)</li>
-<li>主语+谓语(+状语)</li>
-<li>主语+谓语+宾语</li>
-<li>主语+谓语+间接宾语+直接宾语</li>
-<li>主语+谓语+宾语+宾语补足语<font size="2">PS: 注意区分双宾语和复合宾语</font>
-
-</li>
-</ul>
-<h3 id="2、动词"><a href="#2、动词" class="headerlink" title="2、动词"></a>2、动词</h3><h4 id="2-1-实义动词-Notional-Verb"><a href="#2-1-实义动词-Notional-Verb" class="headerlink" title="2.1 实义动词(Notional Verb)"></a>2.1 实义动词(Notional Verb)</h4><h4 id="2-2-助动词-Auxiliary-Verb"><a href="#2-2-助动词-Auxiliary-Verb" class="headerlink" title="2.2 助动词(Auxiliary Verb)"></a>2.2 助动词(Auxiliary Verb)</h4><ul>
-<li>Be类</li>
-<li>Do类</li>
-<li>Have类</li>
-</ul>
-<h4 id="2-3-情态动词-Modal-Verb"><a href="#2-3-情态动词-Modal-Verb" class="headerlink" title="2.3 情态动词(Modal Verb)"></a>2.3 情态动词(Modal Verb)</h4><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -819,7 +815,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -886,20 +882,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -952,7 +948,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">27k</span>
+    <span title="站点总字数">30k</span>
 </div>
 <!--
   <div class="powered-by">
